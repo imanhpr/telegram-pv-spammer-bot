@@ -1,4 +1,15 @@
 [[package]]
+name = "art"
+version = "5.5"
+description = "ASCII Art Library For Python"
+category = "main"
+optional = false
+python-versions = ">=2.7"
+
+[package.extras]
+dev = ["coverage (>=4.1)", "codecov (>=2.0.15)", "vulture (>=1.0)", "bandit (>=1.5.1)", "pydocstyle (>=3.0.0)"]
+
+[[package]]
 name = "atomicwrites"
 version = "1.4.0"
 description = "Atomic file writes."
@@ -263,9 +274,13 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "3c155c434d8c6fcb4b63542513fd3903ca0d3e7e906f5b4c0a97ca31f4d4f594"
+content-hash = "22a2b706a517c0e0781c4c891ed5f8648f66af74cb912f177bcbc61f6fd79d50"
 
 [metadata.files]
+art = [
+    {file = "art-5.5-py2.py3-none-any.whl", hash = "sha256:cd1bbc33f4d3f3b241244726496fac4899e6f0d8bf743f0129c7588d25325eb8"},
+    {file = "art-5.5.tar.gz", hash = "sha256:9a0f3b44dccdcffab7811061eba1914378f75a33e7c535dcc37cc9d000642640"},
+]
 atomicwrites = [
     {file = "atomicwrites-1.4.0-py2.py3-none-any.whl", hash = "sha256:6d1784dea7c0c8d4a5172b6c620f40b6e4cbfdf96d783691f2e1302a7b88e197"},
     {file = "atomicwrites-1.4.0.tar.gz", hash = "sha256:ae70396ad1a434f9c7046fd2dd196fc04b12f9e91ffb859164193be8b6168a7a"},
