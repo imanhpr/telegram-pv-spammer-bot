@@ -20,7 +20,7 @@ def phone_csv_reader(filepath: Path) -> Generator[tuple, None, None]:
 
 def make_sessions():
     clients = []
-    for row in phone_csv_reader(Path("phone.csv")):
+    for row in phone_csv_reader(Path("user_data/phone.csv")):
         code, number, api_id, hash, sms = row
         new_session = SessionAgent(
             phone_number=int(number),
