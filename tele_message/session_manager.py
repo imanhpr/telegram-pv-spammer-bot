@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
@@ -7,14 +7,14 @@ from pyrogram import Client, idle
 SESSION_DIR: Path = Path(".").joinpath("number_sessions")
 
 
-@dataclass(frozen=True)
+@dataclass()
 class SessionAgent:
     phone_number: int
     country_code: int
     api_id: int
     api_hash: str
     sms_rule: bool = False
-    _cl: Optional[Client] = None
+    _cl: Optional[Client] = field(init=False, default=None)
 
     @property
     def full_number(self) -> str:
