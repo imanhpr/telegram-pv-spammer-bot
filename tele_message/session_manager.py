@@ -4,7 +4,7 @@ from typing import Optional
 
 from pyrogram import Client, idle
 
-SESSION_DIR: Path = Path(".").joinpath("number_sessions")
+from .configreader import SESSIONS_DIR
 
 
 @dataclass()
@@ -29,7 +29,7 @@ class SessionAgent:
             api_hash=self.api_hash,
             api_id=self.api_id,
             force_sms=self.sms_rule,
-            workdir=SESSION_DIR,
+            workdir=SESSIONS_DIR,
         )
         cl.start()
         cl.stop()
