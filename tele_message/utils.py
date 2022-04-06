@@ -1,7 +1,8 @@
 import csv
 from collections import namedtuple
 from pathlib import Path
-from typing import Generator
+from typing import BinaryIO, Generator
+from rich.console import Console
 
 from pyrogram import Client
 
@@ -9,6 +10,7 @@ from .configreader import PHONE_FILE_PATH
 from .session_manager import SessionAgent
 
 RawUser = namedtuple("RawUser", ["main_id", "message", "picture", "username"])
+console = Console()
 
 
 def phone_csv_reader(filepath: Path) -> Generator[tuple, None, None]:
@@ -39,8 +41,13 @@ def make_sessions() -> list[SessionAgent]:
         list[SessionAgent]: List of sessions
     """
     clients = []
-    for row in phone_csv_reader(PHONE_FILE_PATH):
+    total_number = csv_len(PHONE_FILE_PATH.open("r"))
+    console.log(f"Total Phone Numbers : [bold][red]{total_number}[/red][/bold]")
+    for index, row in enumerate(phone_csv_reader(PHONE_FILE_PATH), 1):
         code, number, api_id, hash, sms = row
+        console.log(
+            f"Number {index}/{total_number} -> Enter Telegram Code For Number : [bold][red]{code}{number}[/red][/bold]"
+        )
         new_session = SessionAgent(
             phone_number=int(number),
             country_code=int(code),
