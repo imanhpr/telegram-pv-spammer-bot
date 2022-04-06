@@ -28,6 +28,15 @@ def users_csv_reader(filepath: Path) -> Generator[RawUser, None, None]:
         reader = csv.DictReader(csvfile)
         for row in reader:
             yield RawUser(**row)
+
+
+def make_sessions() -> list[SessionAgent]:
+    """Make Sessions from csvfile and save tham
+    then return the lost of them
+
+    Returns:
+        list[SessionAgent]: List of sessions
+    """
     clients = []
     for row in phone_csv_reader(Path("user_data/phone.csv")):
         code, number, api_id, hash, sms = row
