@@ -7,6 +7,7 @@ from typing import NoReturn, Union
 from pyrogram import Client
 from pyrogram.types import User
 
+from .configreader import PHOTOS_DIR
 from .logconfig import logger_factory
 from .report import write_csv_report
 from .utils import users_csv_reader
@@ -98,7 +99,7 @@ class SpamBot:
         for index, data in enumerate(users_csv_reader(user_csv), 1):
             logger.info(f"Message Number : {index}")
             if user := self.bot.get_users(data.main_id or data.username):
-                p = Path(f"user_data/photos/{data.picture}")
+                p = PHOTOS_DIR.joinpath(data.picture)
                 result = self.tphoto_to_user(user, data.message, p, **kwargs)
                 message_state, reason = result
                 if not message_state:

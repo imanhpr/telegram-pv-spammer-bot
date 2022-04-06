@@ -5,6 +5,7 @@ from typing import Generator
 
 from pyrogram import Client
 
+from .configreader import PHONE_FILE_PATH
 from .session_manager import SessionAgent
 
 RawUser = namedtuple("RawUser", ["main_id", "message", "picture", "username"])
@@ -38,7 +39,7 @@ def make_sessions() -> list[SessionAgent]:
         list[SessionAgent]: List of sessions
     """
     clients = []
-    for row in phone_csv_reader(Path("user_data/phone.csv")):
+    for row in phone_csv_reader(PHONE_FILE_PATH):
         code, number, api_id, hash, sms = row
         new_session = SessionAgent(
             phone_number=int(number),
