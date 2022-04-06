@@ -13,6 +13,12 @@ RawUser = namedtuple("RawUser", ["main_id", "message", "picture", "username"])
 console = Console()
 
 
+def csv_len(file: BinaryIO) -> int:
+    with file as f:
+        reader = csv.DictReader(f)
+        return sum(1 for _ in reader)
+
+
 def phone_csv_reader(filepath: Path) -> Generator[tuple, None, None]:
     with filepath.open("r") as csvfile:
         reader = csv.DictReader(csvfile)
