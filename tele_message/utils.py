@@ -1,8 +1,13 @@
 import csv
+from collections import namedtuple
 from pathlib import Path
 from typing import Generator
 
+from pyrogram import Client
+
 from .session_manager import SessionAgent
+
+RawUser = namedtuple("RawUser", ["main_id", "message", "picture", "username"])
 
 
 def phone_csv_reader(filepath: Path) -> Generator[tuple, None, None]:
@@ -18,7 +23,11 @@ def phone_csv_reader(filepath: Path) -> Generator[tuple, None, None]:
             )
 
 
-def make_sessions():
+def users_csv_reader(filepath: Path) -> Generator[RawUser, None, None]:
+    with filepath.open("r") as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            yield RawUser(**row)
     clients = []
     for row in phone_csv_reader(Path("user_data/phone.csv")):
         code, number, api_id, hash, sms = row
